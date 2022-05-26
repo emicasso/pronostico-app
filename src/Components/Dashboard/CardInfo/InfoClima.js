@@ -20,12 +20,11 @@ export default function InfoClima() {
           <CardDetail />
           <h1 className="text-3xl text-gray-600 mb-4 mt-10">Proximos 5 dias en {/* {city} */} Corrientes</h1>
           <ul className="grid grid-cols-3 gap-2">
-          {/* {weatherData.list.map((days, index) => {
+          {show.list.map((days, index) => {
                     if (index > 0) {
-                      return <SummaryCard key={index} day={days} />;
+                      return <CardSummary key={index} day={days} />;
                     }
-                  })} */}
-            <CardSummary />
+                  })} 
           </ul>
         </>
 
