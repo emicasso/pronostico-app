@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import MapIcon from "@mui/icons-material/Map";
+import { DashboardContext } from "../../Landing/Landing";
 
 export default function FormClima() {
+  const { getLocation } = useContext(DashboardContext);
+
+  const [ciudad, setCiudad] = useState("");
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log({ ciudad });
+    if (ciudad === "" || !ciudad) return;
+    getLocation(ciudad)
+  };
+
   return (
     // {/* form card section  */}
     <div className="form-container">
@@ -31,13 +43,13 @@ export default function FormClima() {
         <form
           noValidate
           className="flex justify-center w-full"
-          // onSubmit={handleSubmit}
+          onSubmit={onSubmit}
         >
           <input
             type="text"
             placeholder="Localizacion"
             className="relative rounded-xl py-2 px-3 w-2/3 bg-gray-100 bg-opacity-60 placeholder-gray-700"
-            // onChange={handleChange}
+            onChange={(e) => setCiudad(e.target.value)}
             required
           />
           <button type="submit" className="z-10">

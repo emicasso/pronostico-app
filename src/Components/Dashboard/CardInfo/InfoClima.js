@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DashboardContext } from "../../Landing/Landing";
 import CardDetail from "./CardDetail";
 import CardSummary from "./CardSummary";
 
 export default function InfoClima() {
+  const { show, loading, weather, forecast } = useContext(DashboardContext);
+
+
+
   return (
     // {/* info card section  */}
     <div className="w-2/4 p-5">
       <div className="flex flex-col my-10">
         {/* card jsx  */}
-        {/* <div className="container p-4 flex items-center justify-center h-1/3 mb-auto">
-          <h1 className="text-gray-300 text-4xl font-bold uppercase"></h1>
-        </div> */}
+        
+        {show === true ? (
         <>
           <h1 className="text-5xl text-gray-800 mt-auto mb-4">Hoy</h1>
           <CardDetail />
@@ -24,6 +28,17 @@ export default function InfoClima() {
             <CardSummary />
           </ul>
         </>
+
+        ) : (
+          <div className="container p-4 flex items-center justify-center h-1/3 mb-auto">
+                <h1 className="text-gray-300 text-4xl font-bold uppercase">
+                  Porfavor ingrese Datos
+                </h1>
+              </div>
+        )}
+        {/* <div className="container p-4 flex items-center justify-center h-1/3 mb-auto">
+          <h1 className="text-gray-300 text-4xl font-bold uppercase"></h1>
+        </div> */}
       </div>
       {/* 
       {weatherData.length === 0 ? (
