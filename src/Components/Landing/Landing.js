@@ -1,78 +1,73 @@
 import React, { createContext, useState } from "react";
 import Dashboard from "../Dashboard/Dashboard";
 
-export const DashboardContext = createContext();
+export const LandingContext = createContext();
 
 export default function Landing() {
-  let urlWeather =
-    "https://api.openweathermap.org/data/2.5/weather?&appid=8a5e9515a6583a0a93a8e614d848ffb5&lang=es";
-    let cityUrl = "&q=";
-
   let urlForecast =
-    "https://api.openweathermap.org/data/2.5/forecast?&appid=8a5e9515a6583a0a93a8e614d848ffb5&lang=es";
+  "https://api.openweathermap.org/data/2.5/forecast?";
+  
+  let api_key = "&appid=8a5e9515a6583a0a93a8e614d848ffb5"
 
-  const [weather, setWeather] = useState([]);
-  const [forecast, setForecast] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(false);
-  const [location, setLocation] = useState("");
+  let cityUrl = "&q=";
+  
+  let iconUrl = "http://openweathermap.org/img/wn/";
 
-  const getLocation = async (loc) => {
-    setLoading(true);
-    //guarmados el parametro para cambiar la ciuadad
-    setLocation(loc);
+  // const [noData, setNoData] = useState("No ingreso Datos");
+  // const [weather, setWeather] = useState([]);
+  // const [city, setCity] = useState("Ubicacion Desconocida");
+  // const [icono, setIcono] = useState(`${iconUrl}10n@2x.png`);
+  // const [localizacion, setLocalizacion] = useState("");
+  // const [show, setShow] = useState(false);
 
-    //obteniendo el tiempo real weather
-    urlWeather = urlWeather + cityUrl + loc;
+  const [noData, setNoData] = useState("No ingreso Datos");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [weatherData, setWeatherData] = useState([]);
+  const [city, setCity] = useState("Sin busqueda");
+  const [weatherIcon, setWeatherIcon] = useState(
+    `${iconUrl}10n@2x.png`
+  );
 
-    await fetch(urlWeather)
-      .then((response) => {
-        if (!response.ok) throw { response };
-        return response.json();
-      })
-      //si responde ok pasamos como parametros los datos y seteamos en nuestro estado
-      .then((weatherData) => {
-        console.log(weatherData);
-        setWeather(weatherData);
-      })
-      .catch((error) => console.log(error));
-    setLoading(false);
-    setShow(false);
+  const getWeather = async (loc) => {
+    urlForecast = urlForecast + cityUrl  + loc + api_key ;
+    setWeatherData([]);
 
-    //obteniendo el tiempo real forecast
-    urlForecast = urlForecast + cityUrl + loc;
+    try {
+      let res = await fetch(urlForecast);
+      let data = await res.json();
+        //dataos del pronostico
+        setWeatherData(data);
+        console.log("cargo:", data)
+        //guardamos el nombre de la ciudad con su pais
+        setCity(`${data.city.name}, ${data.city.country}`);
+        console.log("cargo ciudad?",city)
+        //guardamos el icono que identifica el pronostico de la ciudad
+        setWeatherIcon(`${iconUrl + data.list[0].weather[0]["icon"]}@4x.png`);
+      
+    } catch (error) {
+      console.log(`Fallo por: ${error}`);
+    }
 
-    await fetch(urlForecast)
-      .then((response) => {
-        if (!response.ok) throw { response };
-        return response.json();
-      })
-      //si responde ok pasamos como parametros los datos y seteamos en nuestro estado
-      .then((forecastData) => {
-        console.log(forecastData);
-        setForecast(forecastData);
-
-        setLoading(false);
-        //podemos visualizar los datos
-        setShow(true);
-      })
-      .catch((error) => console.log(error));
-    setLoading(false);
-    setShow(false);
   };
 
   return (
-    <DashboardContext.Provider value={{
-      //para obtener la localizacion como parametro en el form
-      getLocation,
+    <LandingContext.Provider
+      value={{
+        //para obtener la localizacion como parametro en el form
+        getWeather,
+        setWeatherIcon,
+        searchTerm,
+        setSearchTerm, 
+        city,
 
-      //para mostar valores en el card
-      show,
-      loading,
-      weather,
-      forecast
-    }}>
+        //para mostar valores en el card
+        weatherData,
+        weatherIcon,
+        noData,
+        iconUrl
+      }}
+    >
       <Dashboard />
-    </DashboardContext.Provider>
+    </LandingContext.Provider>
   );
 }

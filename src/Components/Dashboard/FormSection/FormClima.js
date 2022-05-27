@@ -1,19 +1,22 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import MapIcon from "@mui/icons-material/Map";
-import { DashboardContext } from "../../Landing/Landing";
+import { LandingContext } from "../../Landing";
 
 export default function FormClima() {
-  const { getLocation } = useContext(DashboardContext);
+  const {city, searchTerm, setSearchTerm, getWeather} = useContext(LandingContext);
 
-  const [ciudad, setCiudad] = useState("");
+  // console.log(localizacion)
+  
+  const handleChange = (input) =>{
+    const {value} = input.target
+    setSearchTerm(value)
+  } 
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log({ ciudad });
-    if (ciudad === "" || !ciudad) return;
-    getLocation(ciudad)
-  };
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+    getWeather(searchTerm)
+  }
 
   return (
     // {/* form card section  */}
@@ -29,7 +32,7 @@ export default function FormClima() {
           <MapIcon className="my-auto " aria-hidden="true" />
           <div className="text-right">
             <p className="font-semibold text-lg my-auto mr-auto px-3">
-              {/* {city} */}Corrientes
+              {city}
             </p>
           </div>
         </div>
@@ -43,13 +46,13 @@ export default function FormClima() {
         <form
           noValidate
           className="flex justify-center w-full"
-          onSubmit={onSubmit}
+          onSubmit={handleSubmit}
         >
           <input
             type="text"
             placeholder="Localizacion"
             className="relative rounded-xl py-2 px-3 w-2/3 bg-gray-100 bg-opacity-60 placeholder-gray-700"
-            onChange={(e) => setCiudad(e.target.value)}
+            onChange={handleChange}
             required
           />
           <button type="submit" className="z-10">
@@ -57,9 +60,6 @@ export default function FormClima() {
               className="text-gray-900 -ml-10 z-10 cursor-pointer "
               type="submit"
               aria-hidden="true"
-              // onClick={() => {
-              //   navigator.geolocation.getCurrentPosition(myIP);
-              // }}
             />
           </button>
         </form>
