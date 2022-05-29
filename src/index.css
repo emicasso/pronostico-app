@@ -8,5 +8,5 @@
 .form-container {
     background: url("../public/fondo.jpg") no-repeat 50% 40% / cover;
     height: auto;
-    @apply w-2/4 p-5 rounded-3xl;
+    @apply  p-5 rounded-3xl;
   }

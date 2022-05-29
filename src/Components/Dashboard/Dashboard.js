@@ -4,10 +4,12 @@ import FormClima from "./FormSection/FormClima";
 
 export default function Dashboard() {
   return (
-    <div className="bg-[#1F293B] flex items-center justify-center  h-screen py-10 font-Karla">
-      <div className="flex w-3/4 min-h-full rounded-3xl shadow-lg m-auto bg-[#E2EAF3]">
-        <InfoClima />
+    <div className="bg-[#1F293B] flex items-center justify-center h-full py-10 font-Karla">
+      <div className="container">
+      <div className="flex flex-col lg:flex-row w-4/3 min-h-[40rem] rounded-3xl shadow-lg lg:mx-auto mx-4 bg-[#E2EAF3] ">
         <FormClima />
+        <InfoClima />
+      </div>
       </div>
     </div>
   );

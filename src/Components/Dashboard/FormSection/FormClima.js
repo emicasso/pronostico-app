@@ -4,41 +4,47 @@ import MapIcon from "@mui/icons-material/Map";
 import { LandingContext } from "../../Landing";
 
 export default function FormClima() {
-  const {city, searchTerm, setSearchTerm, getWeather} = useContext(LandingContext);
+  const { city, searchTerm, setSearchTerm, getWeather } =
+    useContext(LandingContext);
 
   // console.log(localizacion)
-  
-  const handleChange = (input) =>{
-    const {value} = input.target
-    setSearchTerm(value)
-  } 
 
-  const handleSubmit = (e) =>{
-    e.preventDefault()
-    getWeather(searchTerm)
-  }
+  const handleChange = (input) => {
+    const { value } = input.target;
+    setSearchTerm(value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getWeather(searchTerm);
+  };
 
   return (
     // {/* form card section  */}
-    <div className="form-container">
+    <div className="form-container lg:w-2/4 p-4 w-full">
       <div className="flex items-center justify-center">
-        <h3
-          className="my-auto mr-auto text-xl font-bold shadow-md py-1 px-3 
-          rounded-md bg-white bg-opacity-30 text-gray-700"
-        >
-          PRONOSTICO APP
-        </h3>
-        <div className="flex p-2 mr-5 text-gray-300 bg-gray-600 bg-opacity-30 rounded-lg">
-          <MapIcon className="my-auto " aria-hidden="true" />
-          <div className="text-right">
-            <p className="font-semibold text-lg my-auto mr-auto px-3">
-              {city}
-            </p>
+        <div className="grid lg:grid-cols-2 gap-2 grid-cols-2">
+          <div className="">
+            <h3
+              className="my-auto mr-auto text-xl font-bold shadow-md py-1 px-3 
+            rounded-md bg-white bg-opacity-30 text-gray-700"
+            >
+              PRONOSTICO APP
+            </h3>
+          </div>
+          <div
+            className="flex my-auto mr-auto text-xl font-bold shadow-md py-1 px-3 
+            rounded-md text-gray-300 bg-gray-600 bg-opacity-80"
+          >
+            <MapIcon className="my-auto" aria-hidden="true" />
+            <div className="">
+              <h3 className="">{city}</h3>
+            </div>
           </div>
         </div>
       </div>
       <div className="flex flex-col items-center justify-center h-full">
-        <h1 className="text-2xl font-bold text-gray-700">
+        <h1 className="text-2xl text-center font-bold text-gray-700">
           La unica aplicacion del clima que Necesitas
         </h1>
         <hr className="h-1 bg-white w-1/4 rounded-full my-5" />
