@@ -4,7 +4,7 @@ import Dashboard from "../Dashboard/Dashboard";
 export const LandingContext = createContext();
 
 export default function Landing() {
-  let urlForecast = "https://api.openweathermap.org/data/2.5/forecast?&lang=sp&cnt=5";
+  let urlForecast = "https://api.openweathermap.org/data/2.5/forecast?&lang=sp";
 
   let api_key = "&appid=8a5e9515a6583a0a93a8e614d848ffb5";
 
@@ -19,7 +19,7 @@ export default function Landing() {
   // const [localizacion, setLocalizacion] = useState("");
   // const [show, setShow] = useState(false);
 
-  const [noData, setNoData] = useState("No ingreso Datos");
+  const [noData, setNoData] = useState();
   const [searchTerm, setSearchTerm] = useState("");
   const [weatherData, setWeatherData] = useState([]);
   const [loadingData, setLoading] = useState(false);
@@ -37,6 +37,7 @@ export default function Landing() {
       let data = await res.json();
       //dataos del pronostico
       setWeatherData(data);
+
       // console.log("cargo:", data)
       setLoading(false);
       //guardamos el nombre de la ciudad con su pais
@@ -44,11 +45,16 @@ export default function Landing() {
       // console.log("cargo ciudad?",city)
       //guardamos el icono que identifica el pronostico de la ciudad
       setWeatherIcon(`${iconUrl + data.list[0].weather[0]["icon"]}@4x.png`);
+      console.log("codigo: " ,data.cod) 
+      
     } catch (error) {
+      console.log(error.cod)
       setLoading(false);
       console.log(`Fallo por: ${error}`);
+      return;
     }
   };
+  
 
   return (
     <LandingContext.Provider
@@ -64,6 +70,7 @@ export default function Landing() {
         weatherData,
         weatherIcon,
         noData,
+        setNoData,
         iconUrl,
         loadingData,
       }}

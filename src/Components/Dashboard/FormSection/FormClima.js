@@ -4,7 +4,7 @@ import MapIcon from "@mui/icons-material/Map";
 import { LandingContext } from "../../Landing";
 
 export default function FormClima() {
-  const { city, searchTerm, setSearchTerm, getWeather } =
+  const { city, searchTerm, setSearchTerm, getWeather, setNoData, noData } =
     useContext(LandingContext);
 
   // console.log(localizacion)
@@ -16,7 +16,13 @@ export default function FormClima() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getWeather(searchTerm);
+    if (searchTerm !== "") {
+      getWeather(searchTerm);
+      setNoData(false);
+      return;
+    } else {
+      setNoData(true);
+    }
   };
 
   return (
@@ -47,8 +53,12 @@ export default function FormClima() {
         <h1 className="text-2xl text-center font-bold text-gray-700">
           La unica aplicacion del clima que Necesitas
         </h1>
+        {noData === true ? (
+          <div className="w-1/2 text-center font-bold text-red-700 rounded-xl uppercase font-Karla border-red-700 border-4 py-3 mt-5">
+            no ingreso datos
+          </div>
+        ) : null}
         <hr className="h-1 bg-white w-1/4 rounded-full my-5" />
-
         <form
           noValidate
           className="flex justify-center w-full"
