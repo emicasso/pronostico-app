@@ -8,7 +8,7 @@ export default function CardSummary({ day }) {
   let day_icon = `${iconUrl + day.weather[0]["icon"]}@2x.png`;
   return (
     <>
-      <li className="flex items-center py-8 w-full mx-auto shadow-xl my-auto justify-center bg-white rounded-lg">
+      <li className="flex items-center py-2 w-full mx-auto shadow-xl my-auto justify-center bg-white rounded-lg">
         <div className="my-auto text-center">
           <p className="tracking-wider">{moment(day.dt_txt).format("dddd")}</p>
           <p className="font-bold text-2xl text-pink-600">

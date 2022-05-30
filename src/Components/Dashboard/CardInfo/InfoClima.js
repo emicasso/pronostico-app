@@ -7,7 +7,7 @@ import { Loading } from "../../../Components";
 export const InfoClimaContext = createContext();
 
 export default function InfoClima() {
-  const { weatherData, loadingData, city, noData} = useContext(LandingContext);
+  const { weatherData, loadingData, city } = useContext(LandingContext);
 
   var today = new Date();
   var day = today.getDate();
@@ -31,7 +31,7 @@ export default function InfoClima() {
           {weatherData.length === 0 ? (
             <div className="container p-4 flex items-center justify-center h-1/3 mb-auto">
               <h1 className="text-gray-300 text-center text-4xl font-bold uppercase">
-                  Porfavor ingrese Datos
+                Porfavor ingrese Datos
               </h1>
             </div>
           ) : (
@@ -45,11 +45,9 @@ export default function InfoClima() {
               </h1>
               <ul className="grid lg:grid-cols-3 gap-2 sm:grid-cols-1">
                 {weatherData.list.map((day, i) => {
-                  if (i === 0) {
-                    return null;
-                  } else if (i % 8 === 0) {
-                    return <CardSummary key={i} day={day} />;
-                  }
+                  return i === 0 ? null : i % 8 === 0 ? (
+                    <CardSummary key={i} day={day} />
+                  ) : null;
                 })}
               </ul>
             </>
