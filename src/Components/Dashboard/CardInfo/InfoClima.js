@@ -29,12 +29,11 @@ export default function InfoClima() {
         <div className="flex flex-col my-1">
           {/* card jsx  */}
           {weatherData.length === 0 ? (
-            // <div className="container p-4 flex items-center justify-center h-1/3 mb-auto">
-            //   <h1 className="text-gray-300 text-center text-4xl font-bold uppercase">
-            //     Porfavor ingrese Datos
-            //   </h1>
-            // </div>
-            <Loading />
+            <div className="container p-4 flex items-center justify-center h-1/3 mb-auto">
+              <h1 className="text-gray-300 text-center text-4xl font-bold uppercase">
+                Porfavor ingrese Datos
+              </h1>
+            </div>
           ) : (
             <>
               <h1 className="text-3xl text-gray-800 mt-auto mb-4">
