@@ -12,7 +12,7 @@ export default function CardDetail() {
 
 
   return (
-    <div className="container py-5 flex items-center justify-around shadow-lg rounded-lg bg-white h-1/3 ">
+    <div className="container py-2 flex items-center justify-around shadow-lg rounded-lg bg-white h-1/3 ">
       <div className="grid lg:grid-cols-2 gap-2 sm:grid-cols-1 text-center">
 
       <div className="my-auto lg:border-r-2 border-gray-100 ">
