@@ -12,7 +12,7 @@ export default function CardDetail() {
 
 
   return (
-    <div className="container p-1 flex items-center justify-around shadow-lg rounded-lg bg-white h-1/3 ">
+    <div className="container py-5 flex items-center justify-around shadow-lg rounded-lg bg-white h-1/3 ">
       <div className="grid lg:grid-cols-2 gap-2 sm:grid-cols-1 text-center">
 
       <div className="my-auto lg:border-r-2 border-gray-100 ">
@@ -31,8 +31,8 @@ export default function CardDetail() {
         <p className="text-gray-400 text-lg">Sensacion Termica: {Math.round(main.feels_like -273.15)}&deg;C</p>
         <p className="text-gray-400 text-lg">Humedas: {main.humidity}%</p>
         <p className="text-gray-400 text-lg">Nuvosidad: {clouds.all}%</p>
-        <p className="text-gray-400 text-lg">Min Temp: {Math.round(main.temp_min -273.15)}&deg;C</p>
-        <p className="text-gray-400 text-lg">Max Temp: {Math.round(main.temp_max -273.15)}&deg;C</p>
+        <p className="text-gray-400 text-lg">Min Temp: {(main.temp_min -273.15).toFixed(1)}&deg;C</p>
+        <p className="text-gray-400 text-lg">Max Temp: {(main.temp_max -273.15).toFixed(1)}&deg;C</p>
       </div>
       </div>
     </div>
