@@ -4,7 +4,7 @@ import MapIcon from "@mui/icons-material/Map";
 import { LandingContext } from "../../Landing";
 
 export default function FormClima() {
-  const { city, searchTerm, setSearchTerm, getWeather, setNoData, noData } =
+  const { city, searchTerm, setSearchTerm, fetchWeather, setNoData, noData } =
     useContext(LandingContext);
 
   // console.log(localizacion)
@@ -17,7 +17,7 @@ export default function FormClima() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchTerm !== "") {
-      getWeather(searchTerm);
+      fetchWeather(searchTerm);
       setNoData(false);
       return;
     } else {
