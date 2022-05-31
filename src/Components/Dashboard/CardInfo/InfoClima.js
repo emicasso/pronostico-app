@@ -7,7 +7,7 @@ import { Loading } from "../../../Components";
 export const InfoClimaContext = createContext();
 
 export default function InfoClima() {
-  const { weatherData, loadingData, city } = useContext(LandingContext);
+  const { weatherData, loadingData, city, noData } = useContext(LandingContext);
 
   var today = new Date();
   var day = today.getDate();
@@ -18,7 +18,6 @@ export default function InfoClima() {
   if (loadingData) {
     return <Loading />;
   }
-
   return (
     <InfoClimaContext.Provider
       value={{
@@ -31,7 +30,7 @@ export default function InfoClima() {
           {weatherData.length === 0 ? (
             <div className="container p-4 flex items-center justify-center h-1/3 mb-auto">
               <h1 className="text-gray-300 text-center text-4xl font-bold uppercase">
-                Porfavor ingrese Datos
+                {noData}
               </h1>
             </div>
           ) : (

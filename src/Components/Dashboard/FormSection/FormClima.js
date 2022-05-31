@@ -7,8 +7,6 @@ export default function FormClima() {
   const { city, searchTerm, setSearchTerm, fetchWeather, setNoData, noData } =
     useContext(LandingContext);
 
-  // console.log(localizacion)
-
   const handleChange = (input) => {
     const { value } = input.target;
     setSearchTerm(value);

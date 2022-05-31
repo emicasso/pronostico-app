@@ -14,6 +14,8 @@ export default function Landing() {
     iconUrl,
     weatherIcon,
     fetchWeather,
+    setNoData,
+    setSearchTerm
   } = useWeather();
 
   return (
@@ -22,6 +24,8 @@ export default function Landing() {
         //para obtener la localizacion como parametro en el form
         fetchWeather,
         searchTerm,
+        setNoData,
+        setSearchTerm,
         
         //para mostar valores en el card
         city,
