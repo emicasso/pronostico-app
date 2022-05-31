@@ -9,7 +9,7 @@ export function useWeather() {
 
   let iconUrl = "http://openweathermap.org/img/wn/";
 
-  const [noData, setNoData] = useState();
+  const [noData, setNoData] = useState("Porfavor ingrese Datos");
   const [searchTerm, setSearchTerm] = useState("");
   const [weatherData, setWeatherData] = useState([]);
   const [loadingData, setLoading] = useState(false);
@@ -19,15 +19,14 @@ export function useWeather() {
   const fetchWeather = async (loc) => {
     urlForecast = urlForecast + cityUrl + loc + api_key;
     setWeatherData([]);
-    console.log("empezo a cargar");
-    setLoading(true);
 
     try {
+      setLoading(true);
       let res = await fetch(urlForecast);
       let data = await res.json();
+
       //dataos del pronostico
       setWeatherData(data);
-
       setLoading(false);
       //guardamos el nombre de la ciudad con su pais
       setCity(`${data.city.name}, ${data.city.country}`);
@@ -35,10 +34,11 @@ export function useWeather() {
       setWeatherIcon(`${iconUrl + data.list[0].weather[0]["icon"]}@4x.png`);
       console.log("codigo: ", data.cod);
     } catch (error) {
-      console.log(error.cod);
       setLoading(false);
+      setWeatherData("");
+
+      setNoData("Localizacion no encontrada");
       console.log(`Fallo por: ${error}`);
-      return;
     }
   };
 
@@ -56,6 +56,6 @@ export function useWeather() {
     weatherIcon,
     setWeatherIcon,
     fetchWeather,
-    iconUrl
+    iconUrl,
   };
 }
