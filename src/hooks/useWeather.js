@@ -32,7 +32,6 @@ export function useWeather() {
       setCity(`${data.city.name}, ${data.city.country}`);
       //guardamos el icono que identifica el pronostico de la ciudad
       setWeatherIcon(`${iconUrl + data.list[0].weather[0]["icon"]}@4x.png`);
-      console.log("codigo: ", data.cod);
     } catch (error) {
       setLoading(false);
       setWeatherData("");

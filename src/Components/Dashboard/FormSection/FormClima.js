@@ -22,7 +22,6 @@ export default function FormClima() {
   };
 
   const handleSelectChange = ({ value }) => {
-    console.log(value);
     setSearchTerm(value);
   };
 
