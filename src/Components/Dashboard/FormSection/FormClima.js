@@ -2,6 +2,15 @@ import React, { useContext } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import MapIcon from "@mui/icons-material/Map";
 import { LandingContext } from "../../Landing";
+import Select from "react-select";
+
+const citys = [
+  { label: "Buenos Aires", value: "Buenos Aires" },
+  { label: "Corrientes", value: "Corrientes" },
+  { label: "Posadas", value: "Posadas" },
+  { label: "Mendoza", value: "Mendoza" },
+  { label: "Cordoba", value: "Cordoba" },
+];
 
 export default function FormClima() {
   const { city, searchTerm, setSearchTerm, fetchWeather, setNoData, noData } =
@@ -9,6 +18,11 @@ export default function FormClima() {
 
   const handleChange = (input) => {
     const { value } = input.target;
+    setSearchTerm(value);
+  };
+
+  const handleSelectChange = ({ value }) => {
+    console.log(value);
     setSearchTerm(value);
   };
 
@@ -56,6 +70,36 @@ export default function FormClima() {
             no ingreso datos
           </div>
         ) : null}
+
+        <hr className="h-1 bg-white w-1/4 rounded-full my-5" />
+        <form
+          noValidate
+          className="flex justify-center w-full"
+          onSubmit={handleSubmit}
+        >
+          <div className="relative rounded-xl py-2 px-3 w-2/3 bg-gray-100 bg-opacity-60 placeholder-gray-700">
+            <Select
+              options={citys}
+              onChange={handleSelectChange}
+              defaultOption
+              className="w-4/5"
+            />
+          </div>
+          <button type="submit" className="z-10">
+            <SearchIcon
+              className="text-gray-900 -ml-10 z-10 cursor-pointer "
+              type="submit"
+              aria-hidden="true"
+            />
+          </button>
+        </form>
+
+        {noData === true ? (
+          <div className="w-1/2 text-center font-bold text-red-700 rounded-xl uppercase font-Karla border-red-700 border-4 py-3 mt-5">
+            no ingreso datos
+          </div>
+        ) : null}
+
         <hr className="h-1 bg-white w-1/4 rounded-full my-5" />
         <form
           noValidate
@@ -64,7 +108,7 @@ export default function FormClima() {
         >
           <input
             type="text"
-            placeholder="Localizacion"
+            placeholder="Ingrese su Localizacion"
             className="relative rounded-xl py-2 px-3 w-2/3 bg-gray-100 bg-opacity-60 placeholder-gray-700"
             onChange={handleChange}
             required
@@ -79,38 +123,5 @@ export default function FormClima() {
         </form>
       </div>
     </div>
-
-    //  form
-    // <div className="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
-    //   <div className="flex-1">
-    //     <div className="text-center">
-    //       <h2 className="text-4xl font-bold text-center text-gray-700 dark:text-white">
-    //          PRONOSTICO APP
-    //       </h2>
-    //       <p className="mt-3 text-gray-500 dark:text-gray-300">
-    //         Ingrese una ciudad o pais
-    //       </p>
-    //     </div>
-    //     <div className="mt-8">
-    //       <form>
-    //         <div>
-    //           <input
-    //             type="email"
-    //             name="email"
-    //             id="email"
-    //             placeholder="Localizacion"
-    //             className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-    //           />
-    //           <i class="fa-solid fa-location-dot"></i>
-    //         </div>
-    //         <div className="mt-6">
-    //           <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-    //             Buscar
-    //           </button>
-    //         </div>
-    //       </form>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
